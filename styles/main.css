@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "plex";
+  src: url("plex.ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "plex", Times, sans-serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.title {
+  font-weight: 100;
+  font-size: 5vw;
+  font-variation-settings: "wght" 100, "wdth" 85;
+}
+
+.title.active {
+  animation: pulse 5800ms infinite forwards ease-in-out;
+}
+
+@keyframes pulse {
+  17% {
+    font-variation-settings: "wght" 700, "wdth" 100;
+  }
+
+  25% {
+    font-variation-settings: "wght" 700, "wdth" 100;
+  }
+  95% {
+    font-variation-settings: "wght" 100, "wdth" 85;
+  }
+}
