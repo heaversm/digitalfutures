@@ -60,34 +60,16 @@ function init() {
     opacity: 0.5,
   });
 
-  var octGeom = new THREE.OctahedronGeometry(600, 0);
   var dodecGeom = new THREE.DodecahedronGeometry(600, 0);
   var sphereGeom = new THREE.SphereGeometry(600, 16, 16);
-  var icoGeom = new THREE.IcosahedronGeometry(600, 0);
-  var coneGeom = new THREE.ConeGeometry(600, 900, 32);
-  var cylinderGeom = new THREE.CylinderGeometry(400, 600, 600, 32);
-  var ringGeom = new THREE.RingGeometry(200, 600, 32);
-  var torusGeom = new THREE.TorusKnotGeometry(600, 200, 100, 16);
-
-  var shape1 = new THREE.Mesh(octGeom, material);
-  shape1.points = [];
 
   var shape2 = new THREE.Mesh(sphereGeom, material);
   shape2.points = [];
 
-  var shape3 = new THREE.Mesh(coneGeom, material);
-  shape3.points = [];
-
-  var shape4 = new THREE.Mesh(torusGeom, material);
-  shape4.points = [];
-
   var shape5 = new THREE.Mesh(dodecGeom, material);
   shape5.points = [];
 
-  var shape6 = new THREE.Mesh(cylinderGeom, material);
-  shape6.points = [];
-
-  targetShapes = [shape1, shape3, shape2, shape4, shape5, shape6];
+  targetShapes = [shape2, shape5];
 
   var segments = maxParticleCount * maxParticleCount;
 
@@ -187,13 +169,26 @@ function initTween() {
   gsap.to(camera.position, {
     z: 3500,
     duration: 30,
-    onComplete: () => {
-      gsap.to(camera.position, {
-        z: 200,
-        duration: 5,
-        delay: 30,
-      });
-    },
+    onComplete: zoomIn,
+  });
+}
+
+function zoomIn() {
+  gsap.to(camera.position, {
+    //final anim
+    z: 200,
+    duration: 5,
+    delay: 30,
+    onComplete: zoomOut,
+  });
+}
+
+function zoomOut() {
+  gsap.to(camera.position, {
+    z: 3500,
+    duration: 5,
+    delay: 5,
+    onComplete: zoomIn,
   });
 }
 
@@ -305,6 +300,11 @@ function animate() {
           20 * (0.1 / effectController.morphing_speed)
         )
           startMorph = false;
+
+        if (!particlesData[i]) {
+          requestAnimationFrame(animate);
+          return;
+        }
         particlePositions[i * 3] =
           cur_pos.x * (1 - effectController.morphing_speed) +
           particlesData[i].cur_pos.x * effectController.morphing_speed;
