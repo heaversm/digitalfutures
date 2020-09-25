@@ -1,3 +1,9 @@
+:root {
+  --color-main: #ff7070;
+  --color-main-dark: #ff3467;
+  --color-accent: #72b791;
+}
+
 @font-face {
   font-family: "plex";
   src: url("plex.ttf");
@@ -79,6 +85,7 @@ body {
 
 .footer-list {
   display: flex;
+  align-items: center;
 }
 
 .footer-list li:not(:first-child):before {
@@ -92,35 +99,50 @@ body {
 }
 
 .socials-item {
-  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .socials-link {
-  padding-bottom: 5px;
   position: relative;
-  color: #ff7070;
+  color: var(--color-main);
   transition: color 0.3s ease-out;
-}
-
-.socials-link:before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: #ff7070;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  transition: background-color 0.3s ease-out, transform 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
 }
 
 .socials-link:hover {
-  color: #ff3467;
+  color: var(--color-main-dark);
+} 
+
+.socials-link:hover .socials-icon path {
+  fill: var(--color-main-dark);
 }
 
-.socials-link:hover:before {
-  background-color: #ff3467;
-  transform: scaleX(0.8);
+.socials-icon {
+  display: none;
+}
+
+.socials-icon path {
+  fill: var(--color-main);
+  transition: fill .3s ease-out;
+}
+
+@media only screen and (max-width: 750px) {
+  .title {
+    font-size: 10vw;
+  }
+  .socials-icon {
+    display: block;
+    height: 25px;
+    width: auto;
+  }
+  .socials-text {
+    display: none;
+  }
+  .footer-list li:not(:first-child):before {
+    content: "";
+  }
 }
 
 @keyframes pulse {

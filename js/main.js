@@ -38,6 +38,10 @@ var startMorph;
 var morphStartedAt;
 var targetShapes;
 
+const COLOR_MAIN= 0xffffff;
+const COLOR_ACCENT=0x72b791;
+
+
 init();
 animate();
 initTween();
@@ -77,7 +81,7 @@ function init() {
   colors = new Float32Array(segments * 3);
 
   var pMaterial = new THREE.PointsMaterial({
-    color: 0xffffff,
+    color: COLOR_MAIN,
     size: 1,
     blending: THREE.AdditiveBlending,
     transparent: true,
@@ -133,7 +137,7 @@ function init() {
   var material = new THREE.LineBasicMaterial({
     vertexColors: THREE.VertexColors,
     blending: THREE.AdditiveBlending,
-    color: 0xffffff,
+    color: COLOR_MAIN,
     transparent: true,
   });
 
